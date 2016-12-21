@@ -7,7 +7,8 @@ module.exports = {
   entry: {
     'polyfills': './client/polyfills.ts',
     'vendor': './client/vendor.ts',
-    'app': './client/app/main.ts'
+    'app': './client/app/main.ts',
+    'styles': './client/styles.less'
   },
 
   resolve: {
@@ -30,13 +31,11 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        exclude: helpers.root('src', 'app'),
-        loader: ExtractTextPlugin.extract('style', 'css?sourceMap')
+        loader: ExtractTextPlugin.extract("style-loader", "css-loader")
       },
       {
-        test: /\.css$/,
-        include: helpers.root('src', 'app'),
-        loader: 'raw'
+        test: /\.less$/,
+        loader: ExtractTextPlugin.extract("style-loader", "css-loader!less-loader")
       }
     ]
   },
